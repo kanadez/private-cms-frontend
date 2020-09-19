@@ -1,0 +1,338 @@
+var aSP = []; 
+var int1 = []; 
+var aKS = []; 
+var aGlobal = []; 
+var cur_KS = "ks_0";
+var cur_KNP = "";
+var lc_counter = 0; 
+var pattern_receiving = 0;
+var switch_pattern_dialog;
+
+$(document).ready(function()
+{
+   resizeUi();
+   //window.resizeTo(1024,600);
+   setDomEvents();
+   buildLP();
+   /*switchPattern("ks_0");*/
+   //resetAHIids();
+   
+});
+
+function setDomEvents()
+{
+   //buildDialogs();
+   
+   $('#post_json').click
+   (
+      function()
+      {
+         alert(gatherPatternData());
+      }
+   );
+   
+   $('#get_json').click
+   (
+      function()
+      {
+         receivePatternPrepare();
+      }
+   );
+   
+   /*$('#switch_pattern').click
+   (
+      function()
+      {
+         if (aGlobal.length != 0)
+         {
+            switch_pattern_dialog.dialog('open');
+         }
+         else
+         {
+            alert("There are no patterns for select");
+         }
+      }
+   );*/
+}
+
+/*function buildDialogs() 
+{
+   switch_pattern_dialog = $('<div></div>').html("Please select pattern:<p><select id='switch_pattern_dialog_select'></select>")
+   .dialog(
+   {
+	   autoOpen: false,
+	   title: "Switching pattern",  
+	   resizable: false,
+	   width: 324,
+		modal: true,
+		buttons: 
+	   {
+		   "OK": function() 
+			{
+			   switchPattern(selected_pattern);
+			   $(this).dialog("close");
+			},
+			"Cancel": function() 
+			{
+			   $(this).dialog("close");
+			}
+		}
+   });
+   var selected_pattern = "";
+   
+   $('#switch_pattern_dialog_select').change
+   (
+      function()
+      {
+         selected_pattern = $(this).val();
+      }
+   );
+   
+   for (var i = 0; i < aGlobal.length; i++)
+   {
+      $('#switch_pattern_dialog_select').append("<option value='"+aGlobal[i]+"'>"+aGlobal[i]+"</option>");
+   }
+   
+   for(var c in aGlobal)
+   {
+      if (!aGlobal.hasOwnProperty(c)) continue;
+      $('#switch_pattern_dialog_select').html("<option value='"+aGlobal[c]+"'>"+aGlobal[c]+"</option>");
+   }
+}*/
+
+function buildLP()
+{
+   $('#LP').append("<div id='1' class='P'><div id='img_1' class='P_IMG'></div><div id='comment_1' class='P_COM'>comment 1</div></div>");
+   $('#1').click(function()
+   {
+      addPattern('1');
+   });
+   $('#LP').append("<div id='2' class='P'><div id='img_2' class='P_IMG'></div><div id='comment_2' class='P_COM'>comment 2</div></div>");
+   $('#2').click(function()
+   {
+     addPattern('2');
+   });
+   $('#LP').append("<div id='3' class='P'><div id='img_3' class='P_IMG'></div><div id='comment_3' class='P_COM'>comment 3</div></div>");
+   $('#3').click(function()
+   {
+     addPattern('3');
+   });
+   $('#LP').append("<div id='4' class='P'><div id='img_4' class='P_IMG'></div><div id='comment_4' class='P_COM'>comment 4</div></div>");
+   $('#4').click(function()
+   {
+     addPattern('4');
+   });
+   $('#LP').append("<div id='5' class='P'><div id='img_5' class='P_IMG'></div><div id='comment_5' class='P_COM'>comment 5</div></div>");
+   $('#5').click(function()
+   {
+     addPattern('5');
+   });
+   $('#LP').append("<div id='6' class='P'><div id='img_6' class='P_IMG'></div><div id='comment_6' class='P_COM'>comment 6</div></div>");
+   $('#6').click(function()
+   {
+     addPattern('6');
+   });
+   $('#LP').append("<div id='7' class='P'><div id='img_7' class='P_IMG'></div><div id='comment_7' class='P_COM'>comment 7</div></div>");
+   $('#7').click(function()
+   {
+     addPattern('7');
+   });
+}
+
+function addPattern(selected_pattern_id)
+{
+   lc_counter++;
+   
+   var cell = aSP.length;
+      
+   aSP[cell] = selected_pattern_id + '_' + lc_counter;
+   $('#LC_UL').append("<li id='" + aSP[cell] + "' class='SP'><div id='" + aSP[cell] + "_content' class='SP_CONTENT'><div id='load_" + aSP[cell] + "' class='LOAD'></div></div><a id='close_" + aSP[cell] + "' href='javascript:void(0)'><img src='img/cross.png' style='float:right; margin:5px;' / ></a><a id='resize_" + aSP[cell] + "' href='javascript:void(0)'><img src='img/arrow_in.png' style='float:right; margin:5px;' / ></a></li>");
+   $('#close_'+ aSP[cell]).click(function()
+   {
+      deleteKS($(this));
+      $('#'+aSP[cell]).remove();
+      aSP[cell] = 0;
+      
+   });
+   
+   $('#resize_'+ aSP[cell]).click(function()
+   {
+      if ($('#'+aSP[cell] + "_content").height() > 57)
+      {
+         $('#'+aSP[cell] + "_content").height(57);
+         $(this).html("<img src='img/arrow_out.png' style='float:right; margin:5px;' / >");
+      }
+      else if ($('#'+aSP[cell] + "_content").height() == 57)
+      {
+         $('#'+aSP[cell] + "_content").css("height", "auto");
+         $(this).html("<img src='img/arrow_in.png' style='float:right; margin:5px;' / >");
+      }
+   });
+      
+   int1[int1.length] = window.setInterval("onSPselect('" + aSP[cell] + "', "+int1.length+")", 1000);
+   
+   $('#LC').scrollTop($("#LC").get(0).scrollHeight);
+
+}
+
+function onSPselect(sp_id, int_array_cell) 
+{
+
+   initDataModel();
+
+   var TMPjson = 
+   {
+      form : "<div id='wrap_KNP' class='wrap_KNP wrap_KNP_ns'><div id='ceil' class='horizontal_block'><div id='ceil_left'><div id='label1'>text for label1</div><div id='label2'>text for label2</div></div><div id='ceil_right'><input id='TXT1' class='fname fname_ns' /><select id='PD' name='language_select' class='pd_language pd_language_ns'><option>Ru</option><option>En</option><option>De</option><option>NL</option></select></div></div><textarea id='TXT2' class='ftitle ftitle_ns' rows='3'></textarea><div id='ACC' class='ACC'><h3><a href='javascript:void(0)'>1</a></h3><div id='section_1_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>2</a></h3><div id='section_2_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>3</a></h3><div id='section_3_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>4</a></h3><div id='section_4_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>5</a></h3><div id='section_5_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>6</a></h3><div id='section_6_div' class='ACC_section'><div class='load_acc_section'></div></div><h3><a href='javascript:void(0)'>7</a></h3><div id='section_7_div' class='ACC_section'><div class='load_acc_section'></div></div></div></div>",
+      formdata: 
+      {
+         fname : "", 
+         ftitle : 
+         {
+            Ru: "",
+            En: "",
+            De: "",
+            NL: ""
+         }, 
+         settings : 0
+      }
+   }
+   
+   $('#load_'+sp_id).remove();
+   clearInterval(int1[int_array_cell]);
+   onSPdataLoad(TMPjson, sp_id);
+}
+
+function onSPdataLoad(json_obj, sp_id) 
+{
+    //alert(123);
+   $("#"+sp_id+"_content").html(json_obj.form);
+   PTNjson.fname = json_obj.formdata.fname;
+   PTNjson.ftitle.Ru = json_obj.formdata.ftitle.Ru;
+   PTNjson.ftitle.En = json_obj.formdata.ftitle.En;
+   PTNjson.ftitle.De = json_obj.formdata.ftitle.De;
+   PTNjson.ftitle.NL = json_obj.formdata.ftitle.NL;
+   PTNjson.settings = json_obj.formdata.settings;
+   //aKS[$('.wrap_KNP').attr("id")] = PTNjson; 
+   resetKNPIids();
+   setKNPEvents();
+}
+
+function gatherPatternData() 
+{
+   if (getAssocArrayLength(aKS) )
+   {
+      str = "[";
+      for (var i = 0; i < aGlobal.length; i++)
+      {
+         var ks = aGlobal[i];
+         jQuery.each
+         (
+            ks, 
+            function(key, val) 
+            { 
+               var ks_key = ks[key]; 
+               str += "'patternid' : "+key+" ";
+               for(var c in ks_key) 
+               {
+                  if (!ks_key.hasOwnProperty(c)) continue;
+                  
+                  str += "'"+c+"':[";
+                  //console.log(str);
+                  str += "'fname': '"+ks_key[c]["fname"]+"',";
+                  str += "'ftitle': ['Ru':'"+ks_key[c]["ftitle"]["Ru"]+"',";
+                  str += "'En':'"+ks_key[c]["ftitle"]["En"]+"',";
+                  str += "'De':'"+ks_key[c]["ftitle"]["De"]+"',";
+                  str += "'NL':'"+ks_key[c]["ftitle"]["Nl"]+"'], 'settings': [";
+                  var m = 0;
+                  jQuery.each
+                  (
+                     ks_key[c]["settings"], 
+                     function(key, val) 
+                     { 
+                        if (m == 1)
+                        {
+                           str += (",'"+key+"': [");
+                        }
+                        else
+                        {
+                           str += ("'"+key+"': [");
+                        }
+                        var z = 0;
+                        jQuery.each
+                        (
+                           ks_key[c]["settings"][key], 
+                           function(key, val) 
+                           { 
+                              if (val != "")
+                              {
+                                 if (z == 0)
+                                 {
+                                    str += ("'"+key+"': '"+val+"'");
+                                    z = 1;
+                                 }
+                                 else
+                                 {
+                                    str += (",'"+key+"': '"+val+"'");
+                                 }
+                              }
+                           }
+                        );
+                        str += "]";  
+                        m = 1; 
+                     }
+                  ); 
+                  str += "]";               
+               }
+            }
+         );       
+      }
+      return str; 
+   }
+   else
+   {
+      return "There are no opened patterns";
+   }
+}
+
+/*function switchPattern(pattern) 
+{
+   cur_KS = pattern;
+   //console.log(cur_KS);
+   if ($('li.SP').length != 0)
+   {
+      $('li.SP').remove();
+   }
+}*/
+
+function getAssocArrayLength(tempArray) 
+{
+   var result = 0;
+   for (tempValue in tempArray) 
+   {
+      result++;
+   }
+	
+   return result;
+}
+
+var receiving_patterns_count = 0;
+
+function receivePatternPrepare()
+{
+   var SP_count = 2; 
+   
+   if ($('li.SP').length != 0) 
+   {
+      $('li.SP').remove();
+   }
+   aGlobal = []; 
+   counter = 0;
+   for (var i = 0; i < SP_count; i++)
+   {
+      addPattern(i);
+   }
+   
+   receiving_patterns_count = SP_count;
+   pattern_receiving = 3;
+   
+}

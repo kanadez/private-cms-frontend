@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Simple Dropdown List Plugin - Examples</title>
+<meta http-equiv="content-type" content="text/html; charset=utf8"/>
+<meta name="keywords" xml:lang="en" content="jquery, drop, down, dropdown, dropdown, list, combobox, dropdownlist"/>
+<meta name="description" content="A jQuery dropdown list replacement plugin for default browser comboxbox and dropdown lists" />
+<link href="css/dropdown.css" type="text/css" rel="stylesheet"/>
+<!--[if lte IE 7]>
+<link href="css/ie.css" type="text/css" rel="stylesheet"/>
+<![endif]-->
+<script type="text/javascript">
+window.google_analytics_uacct = "UA-20547746-3";
+</script>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5973702307329796";
+/* Ad */
+google_ad_slot = "7601577562";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.simpledropdown.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$.simpledropdown("#dropdown1, #dropdown2, #dropdown3");
+});
+</script>
+
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</head>
+
+<body>
+
+<h1 align="center">Simple Dropdown List plugin</h1>
+<h3>Single dropdown list</h3>
+
+<div id="dropdown1">
+<ul>
+  <li>Select a country</li>
+  <li>
+    <ul>
+      <li><a href="#">Argentina</a></li>
+      <li><a href="#">Brazil</a></li>
+      <li><a href="#">Uruguay</a></li>
+      <li><a href="#">France</a></li>
+      <li><a href="#">United Kingdom</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>Coupled dropdown lists</h3>
+<div id="dropdown2">
+<ul>
+  <li>Select a country</li>
+  <li>
+    <ul>
+      <li><a href="#">Argentina</a></li>
+      <li><a href="#">Brazil</a></li>
+      <li><a href="#">Uruguay</a></li>
+      <li><a href="#">France</a></li>
+      <li><a href="#">United Kingdom</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+<div id="dropdown3">
+<ul>
+  <li>Select a country</li>
+  <li>
+    <ul>
+      <li><a href="#">Argentina</a></li>
+      <li><a href="#">Brazil</a></li>
+      <li><a href="#">Uruguay</a></li>
+      <li><a href="#">France</a></li>
+      <li><a href="#">United Kingdom</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>Requirements - &lt;head&gt;</h3>
+<p>To call the plugin:</p>
+<ul class="requirements">
+  <li>Download <strong>jQuery</strong> (<a href="http://code.jquery.com/jquery-1.4.4.min.js" target="_blank">http://code.jquery.com/jquery-1.4.4.min.js</a>) and add it in your scripts</li>
+  <li>Add a <strong>link</strong> to the plugin stylesheet</li>
+  <li>Download the <strong>plugin code</strong> (<a href="http://www.quai-aux-vivres.com/jquery/plugins/simpledropdown/jquery.simpledropdown.v1.2.zip">http://www.quai-aux-vivres.com/jquery/plugins/simpledropdown/jquery.simpledropdown.v1.2.zip</a>)</li>
+  <li>Initialize jQuery using <strong>$(document).ready()</strong> function</li>
+  <li>Call the plugin using plugin fonction coupled with one parameter: <strong>$.simpledropdown(&quot;#acontainer&quot;);</strong></li>
+  <li>You can specify several div's in case you want to have several drop down lists on the same page - Your final &lt;head&gt; tag should look like this:</li>
+</ul>
+<pre>
+&lt;link href=&quot;css/dropdown.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.simpledropdown.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function() {
+	$.simpledropdown(&quot;#dropdown1, #dropdown2&quot;);
+});
+&lt;/script&gt;
+</pre>
+<h3>Requirements - The HTML</h3>
+<p>The HTML to be used:</p>
+<pre>
+&lt;div id=&quot;<strong>dropdown1</strong>&quot;&gt;
+	&lt;ul&gt;
+		&lt;li&gt;Select a country&lt;/li&gt;
+		&lt;li&gt;
+			&lt;ul&gt;
+				&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Argentina&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Brazil&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Uruguay&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#&quot;&gt;France&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#&quot;&gt;United Kingdom&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<h3>Requirements - The  CSS</h3>
+<p>The CSS in to be used (available in dropdown.css as well):</p>
+<pre>
+<strong>#dropdown1 </strong>{
+	position:relative;
+	z-index:2;
+}
+
+<strong>#dropdown2 </strong>{
+	position:relative;
+	z-index:1;
+}
+
+<strong>#dropdown3 </strong>{
+	position:relative;
+	z-index:0;
+	margin-left:170px;<strong> /* This is for adding some space between your lists */</strong>
+}
+
+<strong>.dropdown </strong>{
+	background:url(../img/arrow.png) no-repeat 132px 14px #000;
+	color:#fff;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	cursor:pointer;
+	margin:0;
+	padding:0;
+	position:absolute;
+}
+
+<strong>.dropdown a </strong>{
+	text-decoration:none;
+	color:#fff;
+}
+
+<strong>.dropdown</strong> {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:150px;
+	margin:0 auto;
+}
+
+<strong>.drop ul</strong> {
+	list-style-type:none;
+	margin:0;padding:0;
+}
+
+<strong>.drop ul li:first-child</strong> {
+	border-top:1px solid #000;
+}
+
+.<strong>drop ul li</strong> {
+	display:none;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	background-color:#000;
+	padding:8px;
+}
+
+<strong>.drop ul li:last-child </strong>{
+	display:none;
+	-khtml-border-radius:0 0 8px 8px;
+	border-radius:0 0 8px 8px;
+	-moz-border-radius:0 0 8px 8px;
+	-webkit-border-radius:0 0 8px 8px;
+}
+
+<strong>.selected</strong> {
+	padding:8px;
+	color:#fff;
+}
+
+<strong>.drop ul li:hover </strong>{
+	background-color:#06f;
+}
+</pre>
+<p>This consists of a simple list that is transformed using jQuery. The <strong>list</strong> has to be placed <strong>inside a div</strong> with a custom <strong>ID</strong> or <strong>class</strong> matching the CSS, e.g. 'dropdown1' in the above example. This <strong>ID</strong> will be used a a parameter when calling the function (see above). </p>
+<p>- The single lists can now be placed in any container, as they use relative positioning. </p>
+<p>- To have several lists together on a same line, you have to change the margin-left property starting from the second list and adjust it  to you needs. </p>
+<p>- If you have lists on top of other lists, you'll have to make sure the z-index property is correctly set, so your lists do not inconsistently display on click.</p>
+<p>The plugin has been tested with Mozilla Firefox 3.6.11, Google Chrome, Safari 5.0.2, Opera, IE6, IE7, IE8, IE9 bêta. On IE6 to IE8 you won't get the rounded corners from CSS3, but the system is working well.</p>
+<p>You can use the ie.css file in the CSS folder, it contains a few fixes for old IE versions.</p>
+<p><strong>Works perfectly on:</strong><br />
+- IE7, IE8, IE9 bêta<br />
+- Firefox 3.6<br />
+- Google Chrome<br />
+- Safari 5<br />
+- Opera</p>
+<p>&nbsp;</p>
+<p>Enjoy :-)</p>
+<p class="author">Etienne Fardet</p>
+<p class="author">&nbsp;</p>
+<h3>Changelog:</h3>
+<p><strong>v1.2 - January 19th 2011</strong></p>
+<p>- Removed absolute positioning<br />
+- Updated the demo page with more details</p>
+<h3>To do:</h3>
+<p>-  Fix hover on IE6<br />
+- Add 
+rounded corners for IE versions<br />
+- Implementing options and AJAX<br />
+- Fixing links reconducting to top of the page (with hrefs set '#' to)
+<br />
+  <br />
+</p>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20547746-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

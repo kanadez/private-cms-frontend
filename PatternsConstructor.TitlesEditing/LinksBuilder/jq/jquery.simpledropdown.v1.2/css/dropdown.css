@@ -1,0 +1,65 @@
+/*
+Name: jQuery Simple Drop Down Plugin Stylesheet
+Author: Etienne Fardet
+Version: 1.2
+*/
+
+/* Demo divs - Lists need to be placed in a div with an assigned ID that will be called within the page as a parameter for the main plugin function */
+#dropdown1 {position:relative;z-index:2;}
+
+/* Necessary Styles to make the demo work - Change background colors and colors to match your needs */
+.dropdown {z-index: 888;
+          background:url(../img/arrow.png) no-repeat 202px 14px #f8f8f8;
+          color:#000;
+          -khtml-border-radius:8px;
+          border-radius:8px;
+          -moz-border-radius:8px;
+          -webkit-border-radius:8px;
+          cursor:pointer;
+          margin:0;
+          padding:0;
+          position:absolute;
+          border: 1px solid #eaeaea;
+}
+
+.dropdown a {
+    text-decoration:none;
+    color:#000;
+}
+.dropdown {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    width:220px;
+    margin:0 auto;
+}
+
+.drop ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.drop ul li:first-child {
+    height: 20px;
+}
+.drop ul li {
+    display:none;
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+    background-color:#f8f8f8;
+    padding:8px;
+}
+
+.drop ul li:last-child {
+    display:none;
+    -khtml-border-radius:0 0 8px 8px;
+    border-radius:0 0 8px 8px;
+    -moz-border-radius:0 0 8px 8px;
+    -webkit-border-radius:0 0 8px 8px;}
+.selected {
+    padding:8px;
+    color:#000;
+}
+.drop ul li:hover {
+    background-color:#cacaca;
+}

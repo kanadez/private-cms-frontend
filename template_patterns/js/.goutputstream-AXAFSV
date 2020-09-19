@@ -1,0 +1,333 @@
+var aCI = ["radio0", "radio1", "radio2", "check0", "check1", "check2", "slct", "txt", "multiple_slct", "number_txt1", "number_txt2"]; // изначальные ID контролов ПТН, заданные при разметке
+var aKNPI = ["wrap_KNP", "TXT1", "PD", "TXT2", "section_1_div", "section_2_div", "section_3_div", "section_4_div", "section_5_div", "section_6_div", "section_7_div",]; // изначальные ID контролов КНП, заданные при разметке
+var PTNjson = 0; // экземпляр ПТН
+var acc_load_int = 0; // интервал для крутилки
+var first_loaded = 0; // первая загрузка прошла
+var counter = 0; // счётчик для искусственного задания ID контролов
+var PTN_cntr = 0; // счётчик классовой обработки вкладок аккордиона
+var cur_KS_id = 0; // ID текущего КШ
+var cur_PTN_id = 0; // ID текущего ПТН
+var cur_language = 'Ru'; // текущия язык
+
+function setKNPEvents() // задание событий для статичных DOM-элементов
+{
+   $('.ACC').accordion
+   (
+      {
+         active:false,
+         change:function(ev, ui)
+         {         
+            cur_PTN_id = $(ui.newContent).attr('id');
+            //////console.log(cur_PTN_id);            
+            if (first_loaded == 0)
+            {
+               acc_load_int = window.setInterval("intF()", 1000);               
+               first_loaded = 1;
+            }else
+            {
+               intF();
+            }
+         }
+      }
+   );
+   
+   $('.fname_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         var id = $(this).parent().parent().parent().attr("id");
+         cur_KNP = id;
+         aKS[id].fname = $(this).val();
+         ////console.log(PTNjson.fname);
+      }
+   );
+   
+   //$('.fname_ns').val(aGlobal[0][cur_KS][cur_KNP].fname);
+   
+   //$('.ftitle_ns').val(aGlobal[0][cur_KS][cur_KNP].ftitle.Ru);
+   
+   $('.pd_language_ns').bind
+   (
+      'change',  
+      function (ev) 
+      {
+         var id = $(this).parent().parent().parent().attr("id");
+         cur_KNP = id;
+         
+         $("select[id="+$(this).attr('id')+"] option:selected").each
+         (
+            function () 
+            {
+               cur_language = $(this).text();
+               if (cur_language == "Ru")
+               {
+                  $('#'+id+' > textarea').val(aKS[id].ftitle.Ru);
+               }
+               else if (cur_language == "En")
+               {
+                  $('#'+id+' > textarea').val(aKS[id].ftitle.En);
+                  //console.log(aKS[id].ftitle.En);
+               }
+               else if (cur_language == "De")
+               {
+                  $('#'+id+' > textarea').val(aKS[id].ftitle.De);
+               }
+               else if (cur_language == "NL")
+               {
+                  $('#'+id+' > textarea').val(aKS[id].ftitle.NL);
+               }
+            }
+         );
+      }
+   );
+   
+   $('.ftitle_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         var id = $(this).parent().attr("id");
+         cur_KNP = id;
+         
+         if (cur_language == "Ru")
+         {
+            aKS[id].ftitle.Ru = $(this).val();
+            ////console.log(PTNjson.ftitle.Ru);
+         }
+         else if (cur_language == "En")
+         {
+            aKS[id].ftitle.En = $(this).val();
+            ////console.log(PTNjson.ftitle.En);
+         }
+         else if (cur_language == "De")
+         {
+            aKS[id].ftitle.De = $(this).val();
+            ////console.log(PTNjson.ftitle.De);
+         }
+         else if (cur_language == "NL")
+         {
+            aKS[id].ftitle.NL = $(this).val();
+            ////console.log(PTNjson.ftitle.NL);
+         }
+      }
+   ); 
+   
+   $('.fname_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         var id = $(this).parent().parent().parent().attr("id");
+         cur_KNP = id;
+         aKS[id].fname = $(this).val();
+      }
+   ); 
+   
+   $('.fname_ns').toggleClass("fname_ns");
+   $('.ftitle_ns').toggleClass("ftitle_ns");
+   $('.pd_language_ns').toggleClass("pd_language_ns");
+         
+}
+
+function intF() // запускается по происшествии 1 сек после первого открытия вкладки аккордиона
+{
+   //console.log("##!");
+   $('.ACC_section').load
+   (
+      'form.html',
+      function()
+      {
+         $(this).toggleClass("ACC_section");
+         //console.log("$$!");
+         onACCload($(this));
+         PTN_cntr++;
+      }
+   );
+}
+
+function onACCload(acc) // срабатывает после загрузки формы ПТН (загрузка данных аккордиона). именно здесь необходимо получить с сервера ID для контролов ПТН
+{
+   ////console.log('!'+acc.attr('id'));
+   acc.css('height', '457px');
+   //////console.log($('#'+cur_PTN_id).attr('id'));
+   if (acc_load_int != 0)
+   {
+      clearInterval(acc_load_int);
+      acc_load_int = 0;
+   }
+   
+   resetCIids(acc.attr('id'));
+      console.log("$");
+      //$('.form_txt:visible').val(aGlobal[0][cur_KS][$('.form_txt:visible').parent().parent().parent().parent().parent().attr("id")].settings[$('.form_txt:visible').parent().parent().parent().attr("id")][$('.form_txt:visible').attr("id")]);
+      
+      $('.form_txt:visible').bind
+      (
+         'keyup',  
+         function(ev) 
+         {  
+            var id = $(this).parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().attr("id");
+            aKS[id].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+            console.log(aKS[id].settings[cur_PTN_id][$(this).attr('id')]);
+            console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));                
+         }
+      );
+      
+      $('.check_radio_ns').bind
+      (
+         'change',  
+         function(ev) 
+         {
+            var id = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            $('#'+id+' > * > #'+cur_PTN_id+' > * > * > * > input[name=radio]').each
+            (
+               function()
+               {
+                  if ($(this).attr('checked'))
+                  {
+                     aKS[id].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+                  }
+                  else
+                  {
+                     aKS[id].settings[cur_PTN_id][$(this).attr('id')] = "";
+                  }
+                  console.log(aKS[id].settings[cur_PTN_id][$(this).attr('id')]);
+                  console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+               }
+            );               
+         }
+      ); 
+      
+      $('.check_box_ns').bind
+      (  
+         'change',  
+         function(ev) 
+         {
+            var id = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            console.log(id);
+            $('#'+id+' > * > #'+cur_PTN_id+' > * > * > * > input[name=box]').each
+            (
+               function()
+               {
+                  console.log($(this).attr('id'));
+                  console.log(cur_PTN_id);
+                  if ($(this).attr('checked'))
+                  {                     
+                     aKS[id].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+                  }
+                  else
+                  {
+                     aKS[id].settings[cur_PTN_id][$(this).attr('id')] = "";
+                  }
+                  console.log(aKS[id].settings[cur_PTN_id][$(this).attr('id')]);
+                  console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+               }
+            );        
+         }
+      );
+
+      $('.form_option_ns').bind
+      (
+         'click',  
+         function(ev) 
+         {
+            var id = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            aKS[id].settings[cur_PTN_id][$(this).parent().attr('id')] = $(this).val();
+            console.log(aKS[id].settings[cur_PTN_id][$(this).parent().attr('id')]);
+            console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).parent().attr('id'));  
+         }
+      ); 
+      
+      $(".multiple_slct_ns").change
+      (
+         function () 
+         {
+            var str = "";
+            $("select[id="+$(this).attr('id')+"] option:selected").each
+            (
+               function () 
+               {
+                  if (str.length == 0)
+                  {
+                     str = $(this).val();
+                  }
+                  else
+                  {
+                     str += '|'+$(this).val();
+                  };
+               }
+            );
+            var id = $(this).parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().attr("id");
+            aKS[id].settings[cur_PTN_id][$(this).attr('id')] = str;
+            str = "";
+            console.log(aKS[id].settings[cur_PTN_id][$(this).attr('id')]);
+            console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+         }
+      ); 
+            
+      $('.number_txt_ns').bind
+      (
+         'keyup',  
+         function(ev) 
+         { 
+            var value = $(this).val(); 
+            var rep = /[-/?><|.;~`!@#$%^&*()_+=":\{\}\[\] \\№'a-zA-Zа-яА-Я]/; 
+            if (rep.test(value)) 
+            { 
+               value = value.replace(rep, ''); 
+               $(this).val(value); 
+            } 
+            
+            var id = $(this).parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().attr("id");
+            aKS[id].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+            console.log(aKS[id].settings[cur_PTN_id][$(this).attr('id')]);
+            console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));
+            
+            if (ev.keyCode == 13)
+            {
+               $('#'+id+' > * > #'+cur_PTN_id+' > * > * > input[name=number_txt_2]').focus();
+            }
+         }
+      );      
+
+      $('.check_radio_ns').toggleClass("check_radio_ns");
+      $('.check_box_ns').toggleClass("check_box_ns");
+      $('.form_option_ns').toggleClass("form_option_ns");
+      $('.multiple_slct_ns').toggleClass("multiple_slct_ns");
+      $('.number_txt_ns').toggleClass("number_txt_ns");
+      $('.form_txt_ns').toggleClass("form_txt_ns"); 
+}
+
+function resetKNPIids() // получение с сервера ID для экземпляров ПТН. в данный момент задаются искусственно
+{   
+   var str = "{";
+   for (var i = 0; i < aKNPI.length; i++)
+   {
+      $('#'+aKNPI[i]).attr('id', 'a_'+counter);      
+      if (i > 3)
+      {
+         str += '"a_'+counter+'":"",';
+         //console.log(str);
+      }
+      counter++;
+   }
+   str = str.substr(0, str.length-1);
+   str += "}";
+   var obj = jQuery.parseJSON(str);
+   PTNjson.settings = obj;
+   cur_KNP = $('.wrap_KNP_ns').attr("id");
+   $('.wrap_KNP_ns').toggleClass("wrap_KNP_ns");
+   aKS[cur_KNP] = PTNjson;
+   
+   var str= '{"'+cur_KS+'" : ""}';
+   var obj = jQuery.parseJSON(str);
+   obj[cur_KS] = aKS;
+   aGlobal[0] = obj;
+   
+   if (pattern_receiving == 1) // 

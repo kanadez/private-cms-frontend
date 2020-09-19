@@ -1,0 +1,53 @@
+#wrap_in
+{
+   width:93%;
+   margin-left:auto;
+   margin-right:auto;
+   min-width:502px;
+   
+   border:solid 1px #000;
+   padding:20px;
+}
+
+.form_block
+{
+   width:100%;
+   height:auto;
+   padding:10px 0 10px 0;
+}
+
+.check_radio
+{
+   float:left; 
+   margin:0 10px 0 0;
+}
+
+.check_box
+{
+   float:left; 
+   margin:0 10px 0 0;
+}
+
+.label_25
+{
+   float:left; 
+   width:25%;
+}
+
+.radio
+{
+   width:auto;
+   height:auto;
+   margin:10px 0 0 0;
+}
+
+.double_dots
+{
+   float:left; 
+   margin:0 10px 0 10px;
+}
+
+.form_txt
+{
+   width:69%;
+}

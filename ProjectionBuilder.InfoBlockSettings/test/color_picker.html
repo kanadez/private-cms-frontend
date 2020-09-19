@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>Title</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+	   <script type="text/javascript" src="jq/js/jquery-1.3.2.min.js"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mColorPicker/javascripts/mColorPicker_min.js" charset="UTF-8"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mDOMupdate/javascripts/mDOMupdate.js" charset="UTF-8"></script>
+   </head>
+   <body>
+   
+   <button id="btn">555</button>
+   
+<script type="text/javascript">
+      $(document).bind
+      (
+         'DOMUpdated', 
+         function () 
+         { 
+            /* Insert code to execute here. */ 
+         }
+      );
+      $('#btn').click
+      (
+         function () 
+         {
+            $(document.body).append("<input id='color_5' type='color' value='#fff' data-text='hidden' style='height:20px;width:20px;' />");
+         }
+      );
+</script>
+   </body>
+</html>

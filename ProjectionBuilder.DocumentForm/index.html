@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>Title</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <link type="text/css" href="jq/development-bundle/themes/base/jquery.ui.all.css" rel="stylesheet" />      
+	   <script type="text/javascript" src="jq/js/jquery-1.5.1.min.js"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mColorPicker/javascripts/mColorPicker_min.js" charset="UTF-8"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mDOMupdate/javascripts/mDOMupdate.js" charset="UTF-8"></script>
+      <script type="text/javascript" src="jq/js/jquery-ui-1.8.12.custom.min.js"></script>
+      <script type="text/javascript" src="jq/js/jquery.json-2.2.min.js"></script>
+      <script type="text/javascript" src="jq/js/jquery.contextmenu.r2.packed.js"></script>
+   </head>
+   <body>
+      <div id="wrap">
+         <div id="LC" class="C"></div>        
+         <div id="RC" class="C">
+            <div id="T">      
+               <div id="MINIMIZE"></div>
+               <div id="DELETE_ALL"></div>
+               <div id="LOAD_JSON"></div>
+               <div id="UPLOAD_JSON"></div>
+               <div class="pb_draggable" id="PAGEBREAK"></div>
+               <div id="pd_language_div" style="margin:0 auto; width:100%; float:left;"><select id="pd_language" style="width:100%;"><option>Ru</option><option>En</option><option>De</option><option>NL</option></select></div>
+            </div>
+            <div id="LP"></div>
+         </div>
+      </div>
+      <script type="text/javascript" src="js/indexDR.js"></script>
+      <script type="text/javascript" src="js/ui.js"></script>
+      <div class="contextMenu" id="context_menu">      
+         <ul>
+            <!--<li id="SP_border_settings">Настройка границы блока</li>
+            <li id="bg_color">Цвет блока</li>
+            <li id="content_separator">Разделитель заголовка и содержания</li>!-->
+            <li id="underline">Выводить underline в строках содержания</li>
+            <li id="sv_on">Не показывать блок в сокращённом режиме</li>
+         </ul>
+      </div>
+      <div class="contextMenu" id="context_menu2">      
+         <ul>
+            <!--<li id="SP_border_settings2">Настройка границы блока</li>
+            <li id="bg_color2">Цвет блока</li>
+            <li id="content_separator2">Разделитель заголовка и содержания</li>!-->
+            <li id="underline2">Выводить underline в строках содержания</li>
+            <li id="sv_on2">Показывать блок в сокращённом режиме</li>
+         </ul>
+      </div>
+      <div id="in_dialog" title="Basic dialog">
+         <p id="in_dialog_content">This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,376 @@
+var aCI = ["radio0", "radio1", "radio2", "check0", "check1", "check2", "slct", "txt", "multiple_slct", "number_txt1", "number_txt2"]; // изначальные ID контролов ПТН, заданные при разметке
+var aKNPI = ["wrap_KNP", "TXT1", "PD", "TXT2", "section_1_div", "section_2_div", "section_3_div", "section_4_div", "section_5_div", "section_6_div", "section_7_div",]; // изначальные ID контролов КНП, заданные при разметке
+var PTNjson = 0; // экземпляр ПТН
+var acc_load_int = 0; // интервал для крутилки
+var first_loaded = 0; // первая загрузка прошла
+var counter = 0; // счётчик для искусственного задания ID контролов
+var PTN_cntr = 0; // счётчик классовой обработки вкладок аккордиона
+var cur_KS_id = 0; // ID текущего КШ
+var cur_PTN_id = 0; // ID текущего ПТН
+var cur_language = 'Ru'; // текущия язык
+
+function setKNPEvents() // задание событий для статичных DOM-элементов
+{
+   $('.ACC').accordion
+   (
+      {
+         active:false,
+         collapsible: true,
+         change:function(ev, ui)
+         {         
+            cur_PTN_id = $(ui.newContent).attr('id');
+            ////////console.log(cur_PTN_id);            
+            if (first_loaded == 0)
+            {
+               acc_load_int = window.setInterval("intF()", 1000);               
+               first_loaded = 1;
+            }else
+            {
+               intF();
+            }
+         }
+      }
+   );
+   
+   $('.fname_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         cur_KNP = $(this).parent().parent().parent().attr("id");
+         aGlobal[0][cur_KS][cur_KNP].fname = $(this).val();
+         //console.log(aGlobal[0][cur_KS][cur_KNP].fname);
+      }
+   );
+   
+   $('.pd_language_ns').bind
+   (
+      'change',  
+      function (ev) 
+      {
+         cur_KNP = $(this).parent().parent().parent().attr("id");
+         
+         $("select[id="+$(this).attr('id')+"] option:selected").each
+         (
+            function () 
+            {
+               cur_language = $(this).text();
+               if (cur_language == "Ru")
+               {
+                  $('#'+cur_KNP+' > textarea').val(aGlobal[0][cur_KS][cur_KNP].ftitle.Ru);
+               }
+               else if (cur_language == "En")
+               {
+                  $('#'+cur_KNP+' > textarea').val(aGlobal[0][cur_KS][cur_KNP].ftitle.En);
+                  ////console.log(aKS[id].ftitle.En);
+               }
+               else if (cur_language == "De")
+               {
+                  $('#'+cur_KNP+' > textarea').val(aGlobal[0][cur_KS][cur_KNP].ftitle.De);
+               }
+               else if (cur_language == "NL")
+               {
+                  $('#'+cur_KNP+' > textarea').val(aGlobal[0][cur_KS][cur_KNP].ftitle.NL);
+               }
+            }
+         );
+      }
+   );
+   
+   $('.ftitle_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         cur_KNP = $(this).parent().attr("id");
+         
+         if (cur_language == "Ru")
+         {
+            aGlobal[0][cur_KS][cur_KNP].ftitle.Ru = $(this).val();
+            //////console.log(PTNjson.ftitle.Ru);
+         }
+         else if (cur_language == "En")
+         {
+            aGlobal[0][cur_KS][cur_KNP].ftitle.En = $(this).val();
+            //////console.log(PTNjson.ftitle.En);
+         }
+         else if (cur_language == "De")
+         {
+            aGlobal[0][cur_KS][cur_KNP].ftitle.De = $(this).val();
+            //////console.log(PTNjson.ftitle.De);
+         }
+         else if (cur_language == "NL")
+         {
+            aGlobal[0][cur_KS][cur_KNP].ftitle.NL = $(this).val();
+            //////console.log(PTNjson.ftitle.NL);
+         }
+      }
+   ); 
+   
+   $('.fname_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {
+         cur_KNP = $(this).parent().parent().parent().attr("id");
+         aGlobal[0][cur_KS][cur_KNP].fname = $(this).val();
+      }
+   ); 
+   
+   $('.fname_ns').removeClass("fname_ns");
+   $('.ftitle_ns').removeClass("ftitle_ns");
+   $('.pd_language_ns').removeClass("pd_language_ns");
+         
+}
+
+function intF()
+{
+   $('.ACC_section').load
+   (
+      'form.html',
+      function()
+      {
+         //console.log("form.html loading exec");
+         ////console.log("$");
+         $(this).removeClass("ACC_section");
+         onACCload($(this));
+         PTN_cntr++;
+      }
+   );
+}
+
+function onACCload(acc) 
+{
+   //console.log("onACCload() exec");
+   acc.css('height', '457px');
+   cur_KNP = acc.parent().parent().attr("id");
+   if (acc_load_int != 0)
+   {
+      clearInterval(acc_load_int);
+      acc_load_int = 0;
+   }
+   
+   resetCIids(acc.attr('id'));
+
+   $('#'+acc.attr("id")+'> * > * > .form_txt').val(aGlobal[0][cur_KS][acc.parent().parent().attr("id")].settings[acc.attr("id")][$('#'+acc.attr("id")+'> * > * > .form_txt').attr('id')]);
+   
+   $('.form_txt_ns').bind
+   (
+      'keyup',  
+      function(ev) 
+      {  
+         cur_KNP = $(this).parent().parent().parent().parent().parent().attr("id");
+         cur_PTN_id = $(this).parent().parent().parent().attr("id");
+         aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+         //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')]);
+         //console.log("aKS['"+cur_KNP+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));                
+      }
+   );
+      
+      $('.check_radio_ns').bind
+      (
+         'change',  
+         function(ev) 
+         {
+            cur_KNP = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            $('#'+cur_KNP+' > * > #'+cur_PTN_id+' > * > * > * > input[name=radio]').each
+            (
+               function()
+               {
+                  if ($(this).attr('checked'))
+                  {
+                     aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+                  }
+                  else
+                  {
+                     aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = "";
+                  }
+                  //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')]);
+                  ////console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+               }
+            );               
+         }
+      ); 
+      
+      $('.check_box_ns').bind
+      (  
+         'change',  
+         function(ev) 
+         {
+            cur_KNP = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            $('#'+cur_KNP+' > * > #'+cur_PTN_id+' > * > * > * > input[name=box]').each
+            (
+               function()
+               {
+                  if ($(this).attr('checked'))
+                  {                     
+                     aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+                  }
+                  else
+                  {
+                     aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = "";
+                  }
+                  //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')]);
+                  ////console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+               }
+            );        
+         }
+      );
+
+      $('.form_option_ns').bind
+      (
+         'click',  
+         function(ev) 
+         {
+            cur_KNP = $(this).parent().parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().parent().attr("id");
+            aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).parent().attr('id')] = $(this).val();
+            //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).parent().attr('id')]);
+            ////console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).parent().attr('id'));  
+         }
+      ); 
+      
+      $('.multiple_slct_ns').change
+      (
+         function () 
+         {
+            var str = "";
+            $("select[id="+$(this).attr('id')+"] option:selected").each
+            (
+               function () 
+               {
+                  if (str.length == 0)
+                  {
+                     str = $(this).val();
+                  }
+                  else
+                  {
+                     str += '|'+$(this).val();
+                  };
+               }
+            );
+            cur_KNP = $(this).parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().attr("id");
+            aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = str;
+            str = "";
+            //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')]);
+            ////console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));  
+         }
+      ); 
+            
+      $('.number_txt_ns').bind
+      (
+         'keyup',  
+         function(ev) 
+         { 
+            var value = $(this).val(); 
+            var rep = /[-/?><|.;~`!@#$%^&*()_+=":\{\}\[\] \\№'a-zA-Zа-яА-Я]/; 
+            if (rep.test(value)) 
+            { 
+               value = value.replace(rep, ''); 
+               $(this).val(value); 
+            } 
+            
+            cur_KNP = $(this).parent().parent().parent().parent().parent().attr("id");
+            cur_PTN_id = $(this).parent().parent().parent().attr("id");
+            aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')] = $(this).val();
+            //console.log(aGlobal[0][cur_KS][cur_KNP].settings[cur_PTN_id][$(this).attr('id')]);
+            ////console.log("aKS['"+id+"'].settings."+cur_PTN_id+"."+$(this).attr('id'));
+            
+            if (ev.keyCode == 13)
+            {
+               $('#'+cur_KNP+' > * > #'+cur_PTN_id+' > * > * > input[name=number_txt_2]').focus();
+            }
+         }
+      );      
+
+      $('.check_radio_ns').removeClass("check_radio_ns");
+      $('.check_box_ns').removeClass("check_box_ns");
+      $('.form_option_ns').removeClass("form_option_ns");
+      $('.multiple_slct_ns').removeClass("multiple_slct_ns");
+      $('.number_txt_ns').removeClass("number_txt_ns");
+      $('.form_txt_ns').removeClass("form_txt_ns");
+}
+
+function resetKNPIids() // получение с сервера ID для экземпляров ПТН. в данный момент задаются искусственно
+{   
+   var str = "{";
+   for (var i = 0; i < aKNPI.length; i++)
+   {
+      $('#'+aKNPI[i]).attr('id', 'a_'+counter);      
+      if (i > 3)
+      {
+         str += '"a_'+counter+'":"",';
+         ////console.log(str);
+      }
+      counter++;
+   }
+   str = str.substr(0, str.length-1);
+   str += "}";
+   var obj = jQuery.parseJSON(str);
+   PTNjson.settings = obj;
+   cur_KNP = $('.wrap_KNP_ns').attr("id");
+   $('.wrap_KNP_ns').toggleClass("wrap_KNP_ns");
+   aKS[cur_KNP] = PTNjson;
+   
+   var str= '{"'+cur_KS+'" : ""}';
+   var obj = jQuery.parseJSON(str);
+   obj[cur_KS] = aKS;
+   aGlobal[0] = obj;
+   
+   receivePatternFromServer();
+   assignTitleValues();
+   
+}
+
+function resetCIids(AH_id) // получение с сервера ID для контрлов каждого экземпляра ПТН. в данный момент задаются искусственно
+{
+   
+   var str = "{";
+   for (var i = 0; i < aCI.length; i++)
+   {
+      $('#'+aCI[i]).attr('id', "c_"+counter);
+      str += '"c_'+counter+'":"",';
+      counter++;
+   }
+   str = str.substr(0, str.length-1);
+   str += "}";
+   
+   var obj = jQuery.parseJSON(str);
+   
+   aGlobal[0][cur_KS][cur_KNP].settings[AH_id] = obj;
+   var recv_counter_def = 11 * receiving_patterns_count * 8;
+   
+   if ((pattern_receiving >= 0) && (recv_counter_def == counter))
+   {
+      receivePatternFromServer();
+      assignControlsValues();
+   }
+}
+
+function assignTitleValues()
+{
+   var obj = aGlobal[0][cur_KS];
+   for(var c in obj)
+   {
+      if (!obj.hasOwnProperty(c)) continue;
+      var obj2 = obj[c];
+      console.log(obj);
+      /*var title_id = c;
+      console.log(obj2);
+      for(var c in obj2)
+      {
+         if (!obj2.hasOwnProperty(c)) continue;
+         var obj3 = obj2[c];
+         //console.log(obj3);
+         
+         /*var aStr = title_id.split("_");
+         var fname_id = aStr[0]+"_"+(Number(aStr[1])+1);
+         $('#'+fname_id+'.fname').val(obj3);*/
+      //}
+   }
+}
+
+function assignControlsValues() // 

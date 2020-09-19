@@ -1,0 +1,85 @@
+BODY
+{
+   margin:0;
+}
+
+DIV
+{
+   font-family:Verdana;
+   font-size:12px;
+}
+
+#wrap
+{
+   width:95%;
+}
+
+.C
+{
+   float:left;
+   height:100%;
+   border:solid 1px #cccccc;
+   overflow:auto;
+}
+
+.SP
+{
+   width:95%;
+   height:25%;
+   margin-top:4px;
+   margin-left:2.5%;
+   border:solid 1px #cccccc;
+}
+
+.P
+{
+   width:95%;
+   height:15%;
+   margin-top:4px;
+   margin-left:2.5px;
+   padding:2px;
+   border:solid 1px #cccccc;
+}
+
+.P_IMG
+{
+   float:left;
+   width:25%;
+   height:100%;
+   background:#8ed97c;
+}
+
+.P_COM
+{
+   float:right;
+   width:75%;
+   height:100%;
+}
+
+#T
+{
+   width:100%;
+   height:10%;
+   text-align:center;
+   line-height:500%;
+   margin-top:2px;
+   margin-bottom:2px; 
+}
+
+#LP
+{
+   width:100%;
+   height:89%;
+}
+
+#LC
+{
+   width:75%; 
+}
+
+#RC
+{
+   width:23%;
+   padding-left:2px;
+   padding-right:2px;
+}

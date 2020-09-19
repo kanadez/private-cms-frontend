@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      </title>Title</title>
+      <script type="text/javascript" language="javascript" src="jquery-1.5.1.min.js"></script>
+      <style type="text/css" media="screen">
+         
+         .popup
+         {
+            border:1px solid #000;
+            background:#eee;
+            padding:10px;
+            width:200px;
+            height:100px;
+         }   
+         
+      </style>
+      
+   </head>
+   <body>
+      <input id="cursorX" style="width:100px;" / >
+      <input id="cursorY" style="width:100px;" / >
+      <script>
+         var cursor_x = 0;
+         var cursor_y = 0;
+      
+         $(document).ready(function()
+         {
+            $(document).click(function(ev)
+            {
+               getCursorXY(ev);
+               popup();      
+            });
+         
+         
+         });
+
+         
+      </script>
+   </body>
+</html>

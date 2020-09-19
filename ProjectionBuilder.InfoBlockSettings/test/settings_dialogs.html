@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>Title</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+	   <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mColorPicker/javascripts/mColorPicker_min.js" charset="UTF-8"></script>
+      <script type="text/javascript" src="http://meta100.github.com/mDOMupdate/javascripts/mDOMupdate.js" charset="UTF-8"></script>
+   </head>
+   <body>
+      <div style="width:400px; height:200px; border:solid #000 1px">
+         <input type="checkbox" id="show_SP_border"/>
+         <label for="show_SP_border">Показывать границу блока</label>
+         <div style="margin: 3px 3px 3px 4px">Цвет границы: <input id='color_5' type='color' value='#fff' data-text='hidden' style='height:20px;width:20px;' /></div>
+         <div style="margin: 3px 3px 3px 4px">Ширина границы: <select style="width:100px"><option>1 px</option><option>2 px</option><option>3 px</option><option>4 px</option><option>5 px</option></select></div>
+         <div style="margin: 3px 3px 3px 4px">Пунктир: <select style="width:100px"><option>Точка</option><option>Штрих</option><option>Сплошная</option></select></div>
+      </div>
+      <script>
+         $(document).bind
+         (
+            'DOMUpdated', 
+            function () 
+            { 
+               /* Insert code to execute here. */ 
+            }
+         );
+         var aBlock = [];
+         var border = 
+         {
+            show:true,
+            color:"#000",
+            width:"1px",
+            solid:"solid"
+         };
+         var json = {ID:"6", border: border};
+         var json2 = {ID:"6", border: border};
+         aBlock.push(json);
+         aBlock.push(json2);
+         var array_cell = 0;
+         function setBorderParameter(parameter, parameter_value, SP_id)
+         {
+            //changing sp style
+            for (var i = 0; i < aBlock.length; i++)
+            {
+               if (aBlock[i].ID == SP_id)
+               {
+                  aBlock[array_cell].border[parameter] = parameter_value;
+               }
+            }
+         }
+      </script>
+   </body>
+</html>

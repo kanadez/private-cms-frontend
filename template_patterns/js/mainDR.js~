@@ -1,0 +1,99 @@
+var aSP = new Array(); // массив выбранных паттернов (левый блок)
+var lc_counter = 0; // глобальный счётчик для создания уникальных ключей-идентификаторов выбранных паттернов
+var int1 = new Array(); // односекундный интервал для создания эффекта симуляции загрузки с сервера (через секунду пропадает "крутилка" и в SP кладутся данные)
+
+$(document).ready(function()
+{
+   resizeUi();
+   buildLP();
+   
+});
+
+function buildLP()
+{
+   $('#LP').append("<div id='1' class='P'><div id='img_1' class='P_IMG'></div><div id='comment_1' class='P_COM'>comment 1</div></div>");
+   $('#1').click(function()
+   {
+      addPattern('1');
+   });
+   $('#LP').append("<div id='2' class='P'><div id='img_2' class='P_IMG'></div><div id='comment_2' class='P_COM'>comment 2</div></div>");
+   $('#2').click(function()
+   {
+     addPattern('2');
+   });
+   $('#LP').append("<div id='3' class='P'><div id='img_3' class='P_IMG'></div><div id='comment_3' class='P_COM'>comment 3</div></div>");
+   $('#3').click(function()
+   {
+     addPattern('3');
+   });
+   $('#LP').append("<div id='4' class='P'><div id='img_4' class='P_IMG'></div><div id='comment_4' class='P_COM'>comment 4</div></div>");
+   $('#4').click(function()
+   {
+     addPattern('4');
+   });
+   $('#LP').append("<div id='5' class='P'><div id='img_5' class='P_IMG'></div><div id='comment_5' class='P_COM'>comment 5</div></div>");
+   $('#5').click(function()
+   {
+     addPattern('5');
+   });
+   $('#LP').append("<div id='6' class='P'><div id='img_6' class='P_IMG'></div><div id='comment_6' class='P_COM'>comment 6</div></div>");
+   $('#6').click(function()
+   {
+     addPattern('6');
+   });
+   $('#LP').append("<div id='7' class='P'><div id='img_7' class='P_IMG'></div><div id='comment_7' class='P_COM'>comment 7</div></div>");
+   $('#7').click(function()
+   {
+     addPattern('7');
+   });
+}
+
+function addPattern(selected_pattern_id)
+{
+   lc_counter++;
+   
+   if (aSP.length == 0)
+   {
+      aSP[0] = selected_pattern_id + '_' + lc_counter;
+      $('#LC_UL').append("<li id='" + aSP[0] + "' class='SP'><div id='" + aSP[0] + "_content' class='SP_CONTENT'><div id='load_" + aSP[0] + "' class='LOAD'></div></div><a id='close_" + aSP[0] + "' href='#'><img src='img/cross.png' style='float:right; margin:5px;' / ></a></li>");
+      $('#close_'+ aSP[0]).click(function()
+      {
+
+         $('#'+aSP[0]).remove();
+         aSP[0] = 0;
+      });
+      
+      int1[0] = window.setInterval("onSPdataLoad('" + aSP[0] + "', '" + aSP[0] + " pattern was selected.', 0)", 1000);
+   }
+   else
+   {
+      var cell = aSP.length;
+      
+      aSP[cell] = selected_pattern_id + '_' + lc_counter;
+      $('#LC_UL').append("<li id='" + aSP[cell] + "' class='SP'><div id='" + aSP[cell] + "_content' class='SP_CONTENT'><img id='load_" + aSP[cell] + "' src='img/load.gif' style='margin-left:60%; margin-top:5%;' / ></div><a id='close_" + aSP[cell] + "' href='#'><img src='img/cross.png' style='float:right; margin:5px;' / ></a></li>");
+      $('#close_'+ aSP[cell]).click(function()
+      {
+         $('#'+aSP[cell]).remove();
+         aSP[cell] = 0;
+      });
+      
+      int1[int1.length] = window.setInterval("onSPdataLoad('" + aSP[cell] + "', '" + aSP[cell] + " pattern was selected.', "+int1.length+")", 1000);
+   }
+   
+   $("#LC").scrollTop($("#LC").get(0).scrollHeight);
+   
+   $(function()
+   {
+      $("#LC_UL").sortable();
+   });
+
+}
+
+function onSPdataLoad(sp_id, data, int_array_cell)
+{
+   $('#load_'+sp_id).remove();
+   clearInterval(int1[int_array_cell]);
+   $('#'+sp_id+'_content').html(data);
+}
+
+

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Links Builder</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <!-- BGN Base include files -->        
+        <!--<script type="text/javascript" src="jq/jquery-1.3.2.min.js"></script> -->
+        <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>-->
+        <script type="text/javascript" src="jq/ui/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="js/LinksBuilderDR.js"></script>
+        <!-- END Base include files -->
+
+        <!-- BGN Typical Search Form files -->
+        <script type="text/javascript" src="../TypicalSearchForm/js/tfs_popup.js"></script>
+        <link type="text/css" href="../TypicalSearchForm/jq/dataTables-1.7.4/media/css/demo_table.css" rel="stylesheet" />
+        <link type="text/css" href="../TypicalSearchForm/css/style.css" rel="stylesheet" />
+        <!-- END Typical Search Form files -->
+
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+
+        <!-- BGN jQuery UI files -->
+        <link type="text/css" href="jq/ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="jq/ui/js/jquery-ui-1.8.10.custom.min.js"></script>
+        <!-- END jQuery UI files -->
+
+        <!-- BGN jQuery UI DropDown -->
+        <link href="jq/jquery.simpledropdown.v1.2/css/dropdown.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="jq/jquery.simpledropdown.v1.2/js/jquery.simpledropdown.js"></script>
+        <!-- END jQuery UI DropDown -->
+
+        <!-- BGN jQuery DataTable files -->
+        <link type="text/css" href="../TypicalSearchForm/jq/dataTables-1.7.4/media/css/demo_table.css" rel="stylesheet" />
+        <script type="text/javascript" src="../TypicalSearchForm/jq/dataTables-1.7.4/media/js/jquery.dataTables.min.js"></script>
+        <!-- END jQuery DataTable files -->
+
+        
+
+
+</head>
+
+<body>
+     <div class="wrap_out" align="center">
+         <div class="wrap" align="left">             
+            
+             <div class="navigate-form">
+                 <div class="l_tb" rel="c1">
+                     <img class="but_add" src="img/add.png" alt="" />
+                     <img class="but_edit" src="img/pencil.png" alt="" />
+                     <img class="but_del" src="img/delete.png" alt="" />
+                 </div>
+                 <div class="bot_tb"></div>
+                 <div class="r_tb" rel="c3">
+                     <img class="but_add" src="img/add.png" alt="" />
+                     <img class="but_edit" src="img/pencil.png" alt="" />
+                     <img class="but_del" src="img/delete.png" alt="" />
+                 </div>
+                 <div class="sep0"></div>
+
+                 <div class="c1">
+                     <img class="load-panel load-left" src="img/loading.gif" alt="" />
+                     <div class="cont" rel="gpl">
+                     </div>
+                 </div>
+
+                 <div class="gpl"><div class="cont"></div></div>
+
+                 <div class="c2">
+                     <div class="cont">
+                        <div class="r1"></div>
+                        <div class="r2"></div>
+                        <div class="cl"><div class="c">Some Object</div></div>
+                     </div>
+                 </div>
+
+                 <div class="gpr">
+                     <div class="cont"></div>
+                 </div>
+
+                 <div class="c3">
+                     <img class="load-panel load-right" src="img/loading.gif" alt="" />
+                     <div class="cont" rel="gpr"></div>
+                 </div>
+
+                 <div class="sep7"></div>
+
+                 <div class="ln pager">
+                     <div style="width:138px; height:16px; margin-left:auto; margin-right:auto;">
+                     <a class="rewind" href="javascript:void(0)"></a>
+                     <a class="fastprev" href="javascript:void(0)"></a>
+                     <a class="prev" href="javascript:void(0)"></a>
+                     <input type="text" class="cur_page" value="1" />
+                     <div class="slash">/</div>
+                     <div class="all_page"></div>
+                     <a class="next" href="javascript:void(0)"></a>
+                     <a class="fastnext" href="javascript:void(0)"></a>
+                     <a class="forward" href="javascript:void(0)"></a>
+                     <input type="hidden" class="all_items" value="0" />
+                     <input type="hidden" class="top_items" value="0" />
+                     <input type="hidden" class="panel" rel="gpl" value="c1" />
+                     </div>
+                 </div>
+                 
+                 <div class="bot"></div>
+
+                 <div class="rn pager">
+                     <a class="rewind" href="javascript:void(0)"></a>
+                     <a class="fastprev" href="javascript:void(0)"></a>
+                     <a class="prev" href="javascript:void(0)"></a>
+                     <input type="text" class="cur_page" value="1" />
+                     <div class="slash">/</div>
+                     <div class="all_page"></div>
+                     <a class="next" href="javascript:void(0)"></a>
+                     <a class="fastnext" href="javascript:void(0)"></a>
+                     <a class="forward" href="javascript:void(0)"></a>
+                     <input type="hidden" class="all_items" value="0" />
+                     <input type="hidden" class="top_items" value="0" />
+                     <input type="hidden" class="panel" rel="gpr" value="c3" />
+                 </div>
+                 
+             </div>
+
+             <div id="dialog-message"></div>
+             <div id="yesno"></div>
+         </div>
+     </div>
+    <div class="mask">        
+    </div>
+
+    <div class="link-setting-form">
+     <a class="close" href="javascript:void(0);">x</a>
+     <div class="l1">Object: </div>
+     <div class="cl"><div class="c"></div></div>
+     <div id="search_btn"></div>
+     <div class="sep20"></div>
+
+     <div class="l2">Communication: </div>
+     <div id="community_combo">
+        <ul>
+            <li>Select a communication</li>
+            <li>
+                <ul>
+                    <li><a href="javascript:void(0);" class="l-type-1">Associative</a></li>
+                    <li><a href="javascript:void(0);" class="l-type-2">Straight</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+     <div class="sep30"></div>
+     <div class="buttons">
+         <span class="save">Save</span>
+         &nbsp;&nbsp;
+         <span class="cancel">Cancel</span>
+     </div>
+     <div class="sep10"></div>
+
+ </div>
+
+</body>
+</html>

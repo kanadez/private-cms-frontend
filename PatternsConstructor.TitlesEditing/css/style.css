@@ -1,0 +1,197 @@
+BODY
+{
+   margin:0;
+}
+
+DIV
+{
+   font-family:Verdana;
+   font-size:12px;
+}
+
+A IMG
+{
+   border: none;
+}
+
+UL
+{
+   list-style:none;
+}
+
+TEXTAREA
+{
+   outline:none;
+   padding:0px;
+   resize:none;
+   border: 1px solid;
+   border-color:#dedede;
+   font-family: Verdana;
+   font-size:12px;
+} 
+
+INPUT
+{
+   outline:none;
+   padding:0px;
+   border: 1px solid;
+   border-color:#dedede;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size:12px;
+   height:22px;
+}
+
+#wrap
+{
+   width:95%;
+   min-width:1119px;
+   margin-left:auto;
+   margin-right:auto;
+}
+
+.C
+{
+   float:left;
+   height:100%;
+   border:solid 2px #eaeaea;
+   overflow:auto;
+   
+}
+
+.SP
+{
+   float:left;
+   width:95%;
+   height:auto;
+   min-height:100px;
+   margin-top:4px;
+   margin-left:2.5%;
+   border:solid 1px #eaeaea;
+   background:#F8F8F8;
+}
+
+.SP:hover
+{
+   border-color:#cacaca;
+}
+
+.SP_CONTENT
+{
+   float:left;
+   width:90%;
+   height:auto;
+   margin-top:1%;
+   margin-left:1%;
+   overflow:hidden;
+   background:#F8F8F8;
+}
+
+.P
+{
+   width:95%;
+   height:15%;
+   margin-top:4px;
+   margin-left:2.5px;
+   padding:2px;
+   border:solid 1px #eaeaea;
+   cursor:pointer;
+   background:#F8F8F8;
+}
+
+.P:hover
+{
+   border-color:#cacaca;
+}
+
+
+.P_IMG
+{
+   float:left;
+   width:25%;
+   height:100%;
+   background:url(../img/add.png) center no-repeat;
+   
+}
+
+.P_COM
+{
+   float:right;
+   width:70%;
+   height:100%;
+   margin-left:2.5%;
+   overflow:auto;
+   
+}
+
+.LOAD
+{
+   background:url(../img/load.gif) center no-repeat; 
+   width:100%; 
+   height:91px;
+}
+
+#T
+{
+   width:100%;
+   height:10%;
+   text-align:center;
+   font-size:14px;
+   line-height:500%;
+   margin-top:2px;
+   margin-bottom:2px; 
+}
+
+#LP
+{
+   width:100%;
+   height:89%;
+   overflow:auto;
+}
+
+#LC
+{
+   width:75%; 
+}
+
+#LC_UL
+{
+   height:95%;
+   padding-left:0px;
+}
+
+#RC
+{
+   width:23%;
+   padding-left:2px;
+   padding-right:2px;
+}
+
+.T_button
+{
+   cursor: pointer;
+   float: left;
+   height: 100%;
+   width: 50%;
+}
+
+.T_button:hover
+{
+   opacity:0.7;
+}
+
+#post_json
+{
+   background: url("../img/arrow_up.png") no-repeat center;
+}
+
+#get_json
+{
+   background: url("../img/arrow_down.png") no-repeat center;  
+}
+
+#switch_pattern
+{
+   background: url("../img/table_refresh.png") no-repeat center;
+}
+
+

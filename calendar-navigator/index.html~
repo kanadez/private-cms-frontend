@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+      <title>Title</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+      <link rel="stylesheet" type="text/css" href="css/style.css" /> 
+      <link type="text/css" href="jq/css/custom-theme/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
+      <script type="text/javascript" src="jq/jquery-1.5.1.min.js"></script>
+      <script type="text/javascript" src="jq/js/jquery-ui-1.8.10.custom.min.js"></script>
+   </head>
+   <body>
+      <div id="wrap">
+         <div id="YC" class="C">
+            <ul id="YC_UL">
+               
+            </ul>
+         </div>
+         
+         <div id="EC" class="C">
+            <div id="T">
+               <a id="new_event" href="javascript:void(0)" class="TB_button"></a>
+               <a id="copy_event" href="javascript:void(0)" class="TB_button"></a>
+               <a id="delete_event" href="javascript:void(0)" class="TB_button"></a>
+               <a id="filter_events" href="javascript:void(0)" class="TB_button"></a>
+               <a id="post_data_model" href="javascript:void(0)" class="TB_button"></a>
+            </div>
+            <div id="D1" style="display:none">
+               <form>  
+                  <div id="comment_input_div" class="input_div">Comment: <input id="comment_input" class="new_event_input"/ ></div>
+                  <div id="date_input_div" class="input_div">Date: <input id="date_input" class="new_event_input"/ ></div>
+                  
+                  <div id="radio0_div" class="radio"><input id="radio0" type="radio" name="image" value="radio0" style="float:left;" /><img id="radio0_img" src="img/bell.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio1_div" class="radio"><input id="radio1" type="radio" name="image" value="radio1" style="float:left;" /><img id="radio1_img" src="img/bomb.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio2_div" class="radio"><input id="radio2" type="radio" name="image" value="radio2" style="float:left;" /><img id="radio2_img" src="img/camera.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio3_div" class="radio"><input id="radio3" type="radio" name="image" value="radio3" style="float:left;" /><img id="radio3_img" src="img/car.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio4_div" class="radio"><input id="radio4" type="radio" name="image" value="radio4" style="float:left;" /><img id="radio4_img" src="img/cart.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio5_div" class="radio"><input id="radio5" type="radio" name="image" value="radio5" style="float:left;" /><img id="radio5_img" src="img/exclamation.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio6_div" class="radio"><input id="radio6" type="radio" name="image" value="radio6" style="float:left;" /><img id="radio6_img" src="img/cup.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio7_div" class="radio"><input id="radio7" type="radio" name="image" value="radio7" style="float:left;" /><img id="radio7_img" src="img/comment.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio8_div" class="radio"><input id="radio8" type="radio" name="image" value="radio8" style="float:left;" /><img id="radio8_img" src="img/cake.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="radio9_div" class="radio"><input id="radio9" type="radio" name="image" value="radio9" style="float:left;" /><img id="radio9_img" src="img/bug.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <input type="button" id="save_button" class="button" value="Save" / >
+                  <input type="button" id="cancel_save_button" class="button" value="Cancel" / >                  
+               </form>
+            </div>
+            <div id="D2" style="display:none">
+               <form>
+                  <div id="check0_div" class="radio"><input id="check0" type="checkbox" name="filter_image" value="check0" /><img id="check0_img" src="img/bell.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check1_div" class="radio"><input id="check1" type="checkbox" name="filter_image" value="check1" /><img id="check1_img" src="img/bomb.png" style="width:16px; height:16px; margin-left:10px;" / ></div>
+                  <div id="check2_div" class="radio"><input id="check2" type="checkbox" name="filter_image" value="check2" /><img id="check2_img" src="img/camera.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check3_div" class="radio"><input id="check3" type="checkbox" name="filter_image" value="check3" /><img id="check3_img" src="img/car.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check4_div" class="radio"><input id="check4" type="checkbox" name="filter_image" value="check4" /><img id="check4_img" src="img/cart.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check5_div" class="radio"><input id="check5" type="checkbox" name="filter_image" value="check5" /><img id="check5_img" src="img/exclamation.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check6_div" class="radio"><input id="check6" type="checkbox" name="filter_image" value="check6" /><img id="check6_img" src="img/cup.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check7_div" class="radio"><input id="check7" type="checkbox" name="filter_image" value="check7" /><img id="check7_img" src="img/comment.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check8_div" class="radio"><input id="check8" type="checkbox" name="filter_image" value="check8" /><img id="check8_img" src="img/cake.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <div id="check9_div" class="radio"><input id="check9" type="checkbox" name="filter_image" value="check9" /><img id="check9_img" src="img/bug.png" style="width:16px; height:16px; margin-left:10px;" / ></div> 
+                  <input type="button" id="filter_button" class="button" value="Filter" / >
+                  <input type="button" id="cancel_filter_button" class="button" value="Cancel" / >     
+               </form>
+            </div>
+            <div id="LP">
+
+            </div>
+         </div>
+         <div id="Nav">
+            <a id="year_prev" href="javascript:void(0)"></a>
+            <div id="years_ribbon">
+            </div>
+            <a id="year_next" href="javascript:void(0)"></a>
+         </div>
+      </div>
+      
+      <script type="text/javascript" src="js/indexDR.js"></script>
+      <script type="text/javascript" src="js/ui.js"></script>
+      <div class="ui-widget-overlay" style="display:none;"></div>
+   </body>
+</html>

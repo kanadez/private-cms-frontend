@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Links Builder</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <!-- BGN jQuery UI files -->
+        <link type="text/css" href="jq/ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="jq/ui/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="jq/ui/js/jquery-ui-1.8.10.custom.min.js"></script>
+        <!-- END jQuery UI files -->
+
+</head>
+
+<body>
+    <script>
+        $(document).ready(function(){
+            if($("#confirm").length == 0 )
+                $('body').append('<div id="confirm"></div>');
+
+            $('#confirm').attr('title', 'Confirm');
+            $('#confirm').html("sd");
+            $('#confirm').dialog({
+                    modal: true,
+                    resizable: false,
+                    buttons: {
+                        "Ok": function() {
+                        },
+                        "No": function() {
+                            $(this).dialog("close");
+                        }
+                    }
+            });
+            })
+
+    </script>
+     <div class="wrap_out" align="center">
+         <div class="wrap" align="left">             
+            
+         </div>
+ </div>
+
+</body>
+</html>

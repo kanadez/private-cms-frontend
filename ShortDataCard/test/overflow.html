@@ -1,0 +1,38 @@
+<html>
+   <body>
+      <form>
+         <input type="text" name="txtName" id="txtName" onkeyup="checkSize();" />
+         <span id="divNitinz" style="display: none;"></span>
+         <div id="divDisplay" style="width: 120px; background-color: #FFFF99;"></div>
+         <input type="button" onclick="checkSize();" value="check" name="btnCheck" />
+      </form>
+      <script>
+function getSize() 
+{
+   var divNitinz = document.getElementById('divNitinz');
+   var txtName = document.getElementById('txtName');
+   divNitinz.style.display = 'inline';
+   divNitinz.innerHTML = txtName.value;
+   var txtWidth = divNitinz.offsetWidth;
+   divNitinz.style.display = 'none';
+   return txtWidth;
+}
+
+function checkSize() 
+{
+   var divDisplay = document.getElementById('divDisplay');
+   var txtName = document.getElementById('txtName');
+   if (divDisplay.offsetWidth <>
+   
+      alert('Text overflow');
+      divDisplay.innerHTML = 'Text width: ' + getSize() + ' Display width: ' + divDisplay.offsetWidth;
+   } 
+   else 
+   {
+      divDisplay.innerHTML = txtName.value;
+      window.status = 'Text width: ' + getSize() + ' Display width: ' + divDisplay.offsetWidth;
+   }
+}
+      </script>
+   </body>
+</html>

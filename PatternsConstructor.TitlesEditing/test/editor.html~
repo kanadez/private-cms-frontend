@@ -1,0 +1,65 @@
+<html>
+   <head>
+      <link rel="stylesheet" type="text/css" href="jquery.cleditor.css" />
+      <script type="text/javascript" src="jq/js/jquery-1.5.1.min.js"></script>
+      <script type="text/javascript" src="jquery.cleditor.min.js"></script>
+      <script type="text/javascript">
+         var cle;
+         var foo = [];
+         
+         $(document).ready
+         (
+            function()
+            {
+               foo[0] = $('#editor').cleditor();
+               foo[1] = $('#no_editor').cleditor();
+               
+               console.log(foo);
+               
+               //$('.cleditorMain').css("display", "none");
+               $('#text').change
+               (
+                  function()
+                  {
+                     switchEditor($('#no_editor'), false);
+                  }
+               );
+               
+               $('#html').change
+               (
+                  function()
+                  {
+                     switchEditor($('#no_editor'), true);
+                  }
+               );
+            }
+         );
+      
+         /*function switchEditor(textarea, state)
+         {            
+            if (state == true)
+            {
+               
+               textarea.css("display", "none");
+               var id = textarea.attr("id");
+               $('.cleditorMain').attr("id", id);
+               $('.cleditorMain').css("display", "block");
+            }
+            else
+            {
+               textarea.css("display", "block");
+               $('.cleditorMain').css("display", "none");
+            }
+         }*/
+
+    </script>
+  </head>
+  <body>
+    <input id="text" type="radio" value="text" name="editor" checked="checked"/ ><label for="text">Text</label>
+    <input id="html" type="radio" value="html" name="editor" / ><label for="html">HTML</label>
+    <div id="TXT2_div">
+      <textarea id="no_editor"></textarea>
+      <textarea id="editor"></textarea>
+   </div>
+  </body>
+</html>
